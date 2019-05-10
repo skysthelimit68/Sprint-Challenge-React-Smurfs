@@ -3,7 +3,7 @@ import axios from "axios";
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
-import { Route, NavLink} from 'react-router-dom';
+import { Route, NavLink, Link} from 'react-router-dom';
 import SmurfUpdate from './components/SmurfUpdate';
 import SmurfProfile from './components/SmurfProfile';
 
@@ -117,7 +117,9 @@ class App extends Component {
     return (
       <div className="App"> 
         <header>
-          <h1>Smurf Village</h1>
+          <Link to="/">
+            <h1>Smurf Village</h1>
+          </Link>
           <nav>
             <NavLink to="/">
               Smurf Village
