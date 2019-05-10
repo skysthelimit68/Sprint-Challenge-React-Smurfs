@@ -39,7 +39,7 @@ class SmurfUpdate extends Component {
 
     render() {
         return(
-            <div>
+            <div className="smurfUpdate">
                 <form onSubmit={this.updateSmurf}>
                     <input
                         onChange={this.handleInputChange}

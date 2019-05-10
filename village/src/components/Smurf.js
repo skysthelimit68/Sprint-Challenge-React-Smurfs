@@ -21,7 +21,7 @@ const Smurf = props => {
       <strong>{props.height} tall</strong>
       <p>{props.age} smurf years old</p>
       <button onClick={deleteSmurf}>Delete</button>
-      <Link to={`/smurf/smurf-update/`}>
+      <Link to={`/smurf-update/`}>
         <button 
         onClick = {() => {updateActiveSmurf  (smurfie)}}>Update</button>
       </Link>

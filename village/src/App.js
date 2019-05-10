@@ -117,15 +117,19 @@ class App extends Component {
     return (
       <div className="App"> 
         <header>
+          <h1>Smurf Village</h1>
           <nav>
             <NavLink to="/">
-              <button>Smurf Village</button>
+              Smurf Village
             </NavLink>
             <NavLink to="/smurf-form">
-              <button>Add Smurf</button>
+              Add Smurf
             </NavLink>
           </nav>
         </header>
+        <div className="full-imgWrap">
+          <img src="https://www.awn.com/sites/default/files/styles/original/public/image/featured/1026833-sony-rounds-out-voice-cast-smurfs-lost-village.jpg?itok=cw-O8WBp"/>
+        </div>
         <Route 
           exact 
           path="/" 
@@ -139,7 +143,7 @@ class App extends Component {
         />
 
         <Route 
-          path="/smurf/smurf-update/"
+          path="/smurf-update/"
           render = {(props) => 
           <SmurfUpdate 
           {...props} 
