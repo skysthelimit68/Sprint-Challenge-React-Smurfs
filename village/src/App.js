@@ -4,12 +4,14 @@ import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import { Route, NavLink} from 'react-router-dom';
+import Smurf from './components/Smurf';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       smurfs: [],
+
     };
   }
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
@@ -29,21 +31,38 @@ class App extends Component {
     })
   }
 
+componentDidUpdate() {
+  axios
+    .get('http://localhost:3333/smurfs')
+    .then(res => {
+      if(res.data !== this.state.smurfs) {
+        console.log("Smurf village just got bigger!", res)
+        this.setState({
+          smurfs : res.data
+      })
+      }
+      
 
-  componentDidUpdate() {
+    })
+    .catch(err => {
+      console.log("Something went wrong in the Smurf Village!", err)
+    })
+}
+
+  getNewSmurfs() {
     axios
     .get('http://localhost:3333/smurfs')
     .then(res => {
       if(this.state.smurfs !== res.data)
       this.setState({
-        smurfs : res.data
+        smurfs : res.data,
+        updated: false
       })
     })
     .catch(err => {
       console.log("Something went wrong in the Smurf Village!", err)
     })
   }
-
 
   render() {
     return (
@@ -63,7 +82,15 @@ class App extends Component {
         path="/" 
         render = {(props) => <Smurfs {...props} smurfs={this.state.smurfs} />}
         />
-        <Route path="/smurf-form" component={SmurfForm}
+
+        <Route 
+        path="/smurfs/:id"
+        component = {Smurf}
+        />
+
+        <Route 
+        path="/smurf-form" 
+         component = {SmurfForm}
         /> 
       </div>
     );
