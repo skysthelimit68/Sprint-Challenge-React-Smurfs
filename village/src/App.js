@@ -5,13 +5,15 @@ import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import { Route, NavLink} from 'react-router-dom';
 import SmurfUpdate from './components/SmurfUpdate';
+import SmurfProfile from './components/SmurfProfile';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       smurfs: [],
-      active: {}
+      active: {},
+      profile:{}
 
     };
   }
@@ -29,6 +31,12 @@ class App extends Component {
     })
     .catch(err => {
       console.log("Something went wrong in the Smurf Village!", err)
+    })
+  }
+
+  setProfile = smurf => {
+    this.setState({
+      profile : smurf
     })
   }
 
@@ -98,7 +106,7 @@ class App extends Component {
     })
   }
 
-  updateActive(smurf) {
+  updateActive = smurf => {
     console.log(smurf);
     this.setState({
       active : smurf
@@ -119,25 +127,44 @@ class App extends Component {
           </nav>
         </header>
         <Route 
-        exact 
-        path="/" 
-        render = {(props) => 
-        <Smurfs 
-        {...props} 
-        smurfs={this.state.smurfs} 
-        deleteSmurf={this.deleteSmurf} 
-        updateActive={this.updateActive.bind(this)}/>}
+          exact 
+          path="/" 
+          render = {(props) => 
+          <Smurfs 
+          {...props} 
+          smurfs={this.state.smurfs} 
+          deleteSmurf={this.deleteSmurf} 
+          setProfile={this.setProfile}
+          updateActive={this.updateActive}/>}
         />
 
         <Route 
-        path="/smurf/smurf-update/"
-        render = {(props) => <SmurfUpdate {...props} smurf={this.state.active} updateSmurf={this.updateSmurf}/>}
+          path="/smurf/smurf-update/"
+          render = {(props) => 
+          <SmurfUpdate 
+          {...props} 
+          smurf={this.state.active} 
+          updateSmurf={this.updateSmurf}/>}
         />
 
         <Route 
-        path="/smurf-form" 
-        render = {(props) => <SmurfForm {...props} addSmurf = {this.addSmurf}/>}
+          path="/smurf-form" 
+          render = {(props) => 
+          <SmurfForm 
+          {...props} 
+          addSmurf = {this.addSmurf}/>}
         /> 
+
+        <Route 
+          path="/smurf/:id"
+          render = {(props) => 
+          <SmurfProfile 
+          {...props}
+          profile = {this.state.profile}
+          />}
+
+
+        />
       </div>
     );
   }
