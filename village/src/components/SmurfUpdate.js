@@ -60,7 +60,7 @@ class SmurfUpdate extends Component {
                         value={this.state.height}
                         name="height"
                     />
-                    <button type="submit">Update Smurf</button>
+                    <button type="submit">Update {this.props.smurf.name}</button>
                 </form>
             </div>
         )
